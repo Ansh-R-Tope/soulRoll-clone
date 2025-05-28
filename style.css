@@ -7,10 +7,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* body{
+body{
     background: black;
     color: white;
-} */
+}
 
 .left {
     width: 25vw;
@@ -19,7 +19,7 @@
 
 .right {
     width: 75vw;
-
+    margin: 16px 0;
 }
 
 .home {}
@@ -27,7 +27,7 @@
 .home ul li {
     gap: 15px;
     display: flex;
-    width: 15px;
+    width: 14px;
     list-style: none;
     padding-top: 14px;
     font-weight: bold;
@@ -50,17 +50,35 @@
 
 .library{
     position: relative;
-    min-height: 50vh;
+    min-height: 80vh;
 }
 
 .footer {
+    display: flex;
     position: absolute;
     bottom: 0;
     display: flex;
     font-size: 10px;
     gap: 13px;
+     padding: 10px 0;
 }
 
 .footer a {
     color: grey;
+}
+
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    /* background-color: rgb(34, 34, 34); */
+}
+
+.header > *{
+    padding: 20px;
+}
+
+.playlist{
+    padding: 16px;
+    background-color: rgb(34, 34, 34);
 }
