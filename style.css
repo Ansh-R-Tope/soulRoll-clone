@@ -7,7 +7,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-body{
+body {
     background: black;
     color: white;
 }
@@ -48,7 +48,7 @@ body{
     width: 30px;
 }
 
-.library{
+.library {
     position: relative;
     min-height: 80vh;
 }
@@ -60,7 +60,7 @@ body{
     display: flex;
     font-size: 10px;
     gap: 13px;
-     padding: 10px 0;
+    padding: 10px 0;
 }
 
 .footer a {
@@ -68,17 +68,42 @@ body{
 }
 
 
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     /* background-color: rgb(34, 34, 34); */
 }
 
-.header > *{
+.header>* {
     padding: 20px;
 }
 
-.playlist{
+.playlist {
     padding: 16px;
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(24, 24, 24);
+
+
+}
+
+.card-con {
+    margin: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #252525;
+}
+
+.card>* {
+    padding-top: 10px;
+}
+
+.card img {
+    width: 100%;
+    object-fit: contain;
 }
