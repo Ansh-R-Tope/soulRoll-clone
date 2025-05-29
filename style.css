@@ -93,6 +93,7 @@ body {
 }
 
 .card {
+    position: relative;
     width: 200px;
     padding: 10px;
     border-radius: 5px;
@@ -106,4 +107,11 @@ body {
 .card img {
     width: 100%;
     object-fit: contain;
+}
+
+.play {
+    position: absolute;
+    top: 168px;
+    right: 17px;
+
 }
