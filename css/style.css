@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+    /* dark track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    /* dark gray thumb */
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
+    /* slightly lighter on hover */
+}
+
 
 * {
     margin: 0;
@@ -90,6 +112,8 @@ body {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    overflow-y: scroll;
+    max-height: 70vh;
 }
 
 .card {
@@ -116,4 +140,20 @@ body {
     opacity: 0;
     transition: all 1s ease-out;
 
+}
+
+
+.signbtn {
+    background-color:  #121212;
+    color: rgb(176, 176, 176);
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.signbtn:hover {
+    font-size: 16px;
+    color: white;
 }
