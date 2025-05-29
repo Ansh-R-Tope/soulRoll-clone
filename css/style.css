@@ -113,5 +113,7 @@ body {
     position: absolute;
     top: 168px;
     right: 17px;
+    opacity: 0;
+    transition: all 1s ease-out;
 
 }
