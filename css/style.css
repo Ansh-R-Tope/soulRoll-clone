@@ -184,7 +184,8 @@ body {
 
 .playbar {
     position: fixed;
-    bottom: 22px;
+    height: 60px;
+    bottom: 30px;
     width: 70vw;
     padding: 12px;
     background: linear-gradient(to right, #223f4c, #182e36, #0a151a);
@@ -265,4 +266,14 @@ body {
     font-size: 15px;
     width: 64px;
     padding: 12px;
+}
+
+.seekbar {
+    position: absolute;
+    bottom: 0;
+    width: 98%;
+    height: 6px;
+    background: #ccc; /* Light gray for track */
+    border-radius: 10px;
+    overflow: hidden;
 }
