@@ -25,7 +25,9 @@
 }
 
 .bg-grey {
-    background-color: #121212;
+  background: linear-gradient(to right, #2E5568, #1F3E50, #102832);
+
+
     color: white;
 }
 

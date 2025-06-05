@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <!-- Glowing Circle -->
+  <circle 
+    cx="60" 
+    cy="60" 
+    r="50" 
+    stroke="#AEE3F9" 
+    stroke-width="4" 
+    fill="none" 
+    filter="url(#glow)" 
+  />
+
+  <!-- Centered Play Button -->
+  <polygon 
+    points="52,45 52,75 78,60" 
+    fill="#AEE3F9"
+    filter="url(#glow)"
+  />
+
+  <!-- Glow Filter -->
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#AEE3F9" flood-opacity="1"/>
+    </filter>
+  </defs>
+</svg>
+
