@@ -222,7 +222,7 @@ body {
     fill: white;
 }
 
-.song-list{
+.song-list {
     height: 500px;
     overflow: auto;
     margin-bottom: 44px;
@@ -273,18 +273,20 @@ body {
     bottom: 0;
     width: 70vw;
     height: 2px;
-    background: #ccc; /* Light gray for track */
+    background: #ccc;
+    /* Light gray for track */
     border-radius: 10px;
     margin: 6px;
-    
+
 }
 
-.circle{
-width: 13px;
-height: 13px;
-border-radius: 13px;
-background-color:  #ccc; 
-position: relative;
-bottom: 6px;
-left: 0%;
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: #ccc;
+    position: relative;
+    bottom: 6px;
+    left: 0%;
+    transition: left 0.5s;
 }

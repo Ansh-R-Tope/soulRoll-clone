@@ -1,4 +1,4 @@
-
+let currentSong = new Audio();
 
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:3000/songs/")
@@ -18,9 +18,19 @@ async function getSongs() {
 
 }
 
+const playMusic = (track) => {
+    // let audio = new Audio("/songs/" + track)
+    currentSong.src="/songs/" + track
+    currentSong.play()
+}
+
+
 async function main() {
+
+
+    // Getting list of songs
     let songs = await getSongs()
-    console.log(songs);
+
 
     let songUl = document.querySelector(".song-list").getElementsByTagName("ul")[0]
     for (const song of songs) {
@@ -34,6 +44,27 @@ async function main() {
                                 <img  src="/img/play button.svg" alt="">
                             </div></li>`
     }
+
+    // applying event listener to every song
+
+    Array.from(document.querySelector(".song-list").getElementsByTagName("li")).forEach(e => {
+        e.addEventListener("click", element => {
+            console.log(e.querySelector(".info").firstElementChild.innerHTML);
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+        })
+    })
+
+    //attach event listener to buttons
+    play.addEventListener("click",()=>{
+        if(currentSong.paused){
+            currentSong.play()
+            play.src="img/pause.svg"
+        }
+        else{
+            currentSong.pause()
+            play.src="img/playbtn.svg"
+        }
+    })
 
 }
 main()
