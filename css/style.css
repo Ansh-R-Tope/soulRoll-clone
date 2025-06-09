@@ -190,7 +190,7 @@ body {
     padding: 12px;
     background: linear-gradient(to right, #223f4c, #182e36, #0a151a);
     box-shadow: 0 -2px 10px rgba(10, 25, 30, 0.7);
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .controls {
@@ -271,9 +271,20 @@ body {
 .seekbar {
     position: absolute;
     bottom: 0;
-    width: 98%;
-    height: 6px;
+    width: 70vw;
+    height: 2px;
     background: #ccc; /* Light gray for track */
     border-radius: 10px;
-    overflow: hidden;
+    margin: 6px;
+    
+}
+
+.circle{
+width: 13px;
+height: 13px;
+border-radius: 13px;
+background-color:  #ccc; 
+position: relative;
+bottom: 6px;
+left: 0%;
 }
