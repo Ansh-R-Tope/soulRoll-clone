@@ -298,46 +298,41 @@ body {
     position: absolute;
     bottom: 0;
     width: 70vw;
-    height: 10px; /* Track thickness */
-    background: #2c2c2c;
-    border-radius: 5px;
+    height: 8px;
+    background: #5d5c5c;
+    border-radius: 10px;
     margin: 6px;
-    --progress: 0%;
+    position: relative;
+    overflow: visible;
 }
 
-/* Progress bar fill */
-.seekbar::before {
-    content: "";
+/* Fills as music plays */
+.progress {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
-    width: var(--progress);
-    background: linear-gradient(90deg, #00f260, #0575e6);
-    border-radius: 5px;
+    width: 0%; /* Filled by JS */
+    background: linear-gradient(to right, #00f260, #0575e6);
+    border-radius: 10px;
     transition: width 0.3s ease;
 }
 
-/* Centered knob */
+/* Circle knob */
 .circle {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background-color: #fff;
-    border: 2px solid #00f260;
+    background-color: #ccc;
     position: absolute;
     top: 50%;
-    left: calc(var(--progress) - 9px); /* Center horizontally */
-    transform: translateY(-50%); /* Perfectly center vertically */
-    box-shadow: 0 0 8px rgba(0, 242, 96, 0.6);
-    transition: left 0.3s ease, transform 0.2s ease;
+    left: 0%;
+    transform: translate(-50%, -7px);
+    transition: left 0.5s;
     pointer-events: none;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Optional: knob hover enlarge */
-.seekbar:hover .circle {
-    transform: translateY(-50%) scale(1.1);
-}
 
 .songinfo, .songtime{
     color: white;

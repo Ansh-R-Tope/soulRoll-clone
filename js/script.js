@@ -93,7 +93,21 @@ async function main() {
     currentSong.addEventListener("timeupdate", () => {
         console.log(currentSong.currentTime, currentSong.duration);
         document.querySelector(".songtime").innerHTML = `${secondsToMinutes(currentSong.currentTime)} / ${secondsToMinutes(currentSong.duration)}`
+        document.querySelector(".circle").style.left=(currentSong.currentTime/currentSong.duration)*100+"%";
     })
 
 }
 main()
+
+
+const circle = document.querySelector(".circle");
+const progress = document.querySelector(".progress");
+
+function updateSeekbar() {
+    const percent = (currentSong.currentTime / currentSong.duration) * 100;
+    circle.style.left = percent + "%";
+    progress.style.width = percent + "%";
+}
+
+currentSong.addEventListener("timeupdate", updateSeekbar);
+
