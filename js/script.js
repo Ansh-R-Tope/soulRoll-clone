@@ -91,23 +91,22 @@ async function main() {
 
     //listen for timeupdate event
     currentSong.addEventListener("timeupdate", () => {
-        console.log(currentSong.currentTime, currentSong.duration);
         document.querySelector(".songtime").innerHTML = `${secondsToMinutes(currentSong.currentTime)} / ${secondsToMinutes(currentSong.duration)}`
-        document.querySelector(".circle").style.left=(currentSong.currentTime/currentSong.duration)*100+"%";
+        const percent = (currentSong.currentTime / currentSong.duration) * 100;
+        document.querySelector(".circle").style.left = percent + "%";
+        document.querySelector(".progress").style.width = percent + "%";
     })
 
+    // event lister to seekbar
+    document.querySelector(".seekbar").addEventListener("click", e => {
+        const per = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = per + "%";
+        document.querySelector(".progress").style.width = per + "%";
+    })
 }
 main()
 
 
-const circle = document.querySelector(".circle");
-const progress = document.querySelector(".progress");
 
-function updateSeekbar() {
-    const percent = (currentSong.currentTime / currentSong.duration) * 100;
-    circle.style.left = percent + "%";
-    progress.style.width = percent + "%";
-}
 
-currentSong.addEventListener("timeupdate", updateSeekbar);
 
