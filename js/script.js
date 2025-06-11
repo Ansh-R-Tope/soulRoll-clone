@@ -1,5 +1,22 @@
 let currentSong = new Audio();
 
+function secondsToMinutes(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "Invalid input"
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`
+
+}
+
+
+
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:3000/songs/")
     let response = await a.text()
@@ -18,13 +35,16 @@ async function getSongs() {
 
 }
 
-const playMusic = (track) => {
+const playMusic = (track, pause = false) => {
     // let audio = new Audio("/songs/" + track)
-    currentSong.src="/songs/" + track
-    currentSong.play()
-    play.src="img/pause.svg"
-    document.querySelector(".songinfo").innerHTML=track
-    document.querySelector(".songtime").innerHTML="00:00 / 00:00"
+    currentSong.src = "/songs/" + track
+    if (!pause) {
+        currentSong.play()
+        play.src = "img/pause.svg"
+    }
+
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 
 
@@ -33,7 +53,7 @@ async function main() {
 
     // Getting list of songs
     let songs = await getSongs()
-
+    playMusic(songs[0], true)
 
     let songUl = document.querySelector(".song-list").getElementsByTagName("ul")[0]
     for (const song of songs) {
@@ -58,15 +78,21 @@ async function main() {
     })
 
     //attach event listener to buttons
-    btnplay.addEventListener("click",()=>{
-        if(currentSong.paused){
+    btnplay.addEventListener("click", () => {
+        if (currentSong.paused) {
             currentSong.play()
-            play.src="img/pause.svg"
+            play.src = "img/pause.svg"
         }
-        else{
+        else {
             currentSong.pause()
-            play.src="img/playbtn.svg"
+            play.src = "img/playbtn.svg"
         }
+    })
+
+    //listen for timeupdate event
+    currentSong.addEventListener("timeupdate", () => {
+        console.log(currentSong.currentTime, currentSong.duration);
+        document.querySelector(".songtime").innerHTML = `${secondsToMinutes(currentSong.currentTime)} / ${secondsToMinutes(currentSong.duration)}`
     })
 
 }

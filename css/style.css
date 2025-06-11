@@ -339,3 +339,12 @@ body {
     transform: translateY(-50%) scale(1.1);
 }
 
+.songinfo, .songtime{
+    color: white;
+    padding: 0 12px;
+}
+
+.abovebar{
+    display: flex;
+    justify-content: space-between;
+}
