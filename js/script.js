@@ -99,9 +99,13 @@ async function main() {
 
     // event lister to seekbar
     document.querySelector(".seekbar").addEventListener("click", e => {
-        const per = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        //  const per = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        const rect = seekbar.getBoundingClientRect(); // 👈 Always use .seekbar's box
+        const clickX = e.clientX - rect.left;
+        const per = (clickX / rect.width) * 100;
         document.querySelector(".circle").style.left = per + "%";
         document.querySelector(".progress").style.width = per + "%";
+        currentSong.currentTime = (currentSong.duration) * per / 100
     })
 }
 main()

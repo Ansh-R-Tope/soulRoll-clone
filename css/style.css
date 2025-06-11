@@ -196,7 +196,7 @@ body {
 .controls {
     display: flex;
     justify-content: center;
-    
+
 }
 
 .btn {
@@ -313,7 +313,8 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    width: 0%; /* Filled by JS */
+    width: 0%;
+    /* Filled by JS */
     background: linear-gradient(to right, #00f260, #0575e6);
     border-radius: 10px;
     transition: width 0.5s ease;
@@ -335,12 +336,13 @@ body {
 }
 
 
-.songinfo, .songtime{
+.songinfo,
+.songtime {
     color: white;
     padding: 0 12px;
 }
 
-.abovebar{
+.abovebar {
     display: flex;
     justify-content: space-between;
 }
