@@ -196,6 +196,7 @@ body {
 .controls {
     display: flex;
     justify-content: center;
+    
 }
 
 .btn {
@@ -221,6 +222,7 @@ body {
     height: 24px;
     fill: white;
 }
+
 
 .song-list {
     height: 500px;
