@@ -23,6 +23,8 @@ const playMusic = (track) => {
     currentSong.src="/songs/" + track
     currentSong.play()
     play.src="img/pause.svg"
+    document.querySelector(".songinfo").innerHTML=track
+    document.querySelector(".songtime").innerHTML="00:00 / 00:00"
 }
 
 
@@ -56,7 +58,7 @@ async function main() {
     })
 
     //attach event listener to buttons
-    play.addEventListener("click",()=>{
+    btnplay.addEventListener("click",()=>{
         if(currentSong.paused){
             currentSong.play()
             play.src="img/pause.svg"
