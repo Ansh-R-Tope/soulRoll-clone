@@ -107,6 +107,19 @@ async function main() {
         document.querySelector(".progress").style.width = per + "%";
         currentSong.currentTime = (currentSong.duration) * per / 100
     })
+
+    //addevent to hambugericon
+    left = document.querySelector(".left")
+    hamburger = document.querySelector(".hamburger")
+    hamburger.addEventListener("click", () => {
+        left.style.left = "0"
+    })
+
+    //addevent to close button
+    document.querySelector(".close").addEventListener("click", () => {
+        left.style.left = "-120%"
+    })
+
 }
 main()
 
