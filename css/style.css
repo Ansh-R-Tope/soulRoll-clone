@@ -362,6 +362,10 @@ body {
     margin: 20px 0;
 }
 
+.close{
+     display: none;
+}
+
 @media (max-width:1400px) {
     .left {
         position: absolute;
@@ -378,6 +382,7 @@ body {
         right: 31px;
         top: 25px;
         width: 29px;
+        display: block;
 
     }
 
