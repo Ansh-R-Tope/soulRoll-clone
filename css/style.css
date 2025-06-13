@@ -115,7 +115,7 @@ body {
     flex-wrap: wrap;
     overflow-y: auto;
     max-height: 70vh;
-   
+
 }
 
 .card {
@@ -362,8 +362,26 @@ body {
     margin: 20px 0;
 }
 
-.close{
-     display: none;
+.close {
+    display: none;
+    background: transparent;
+    border: 2px solid rgba(255, 80, 80, 0.6);
+    /* Reddish outline */
+    color: white;
+    padding: 8px;
+    margin: 0 8px;
+    border-radius: 50%;
+    /* Circular shape */
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.close:hover {
+    border-color: rgba(255, 80, 80, 1);
+    background-color: rgba(255, 80, 80, 0.1);
+    transform: scale(1.1);
 }
 
 @media (max-width:1400px) {
@@ -388,6 +406,7 @@ body {
 
     .right {
         width: 100vw;
+        margin: 0;
     }
 
     .playbar {
@@ -403,12 +422,13 @@ body {
 
     }
 
-    .card{
+    .card {
         width: 90vw;
     }
 
-    .card-con{
+    .card-con {
         margin: 0;
         justify-content: center;
     }
+    
 }
