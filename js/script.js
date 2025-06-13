@@ -1,8 +1,9 @@
 let currentSong = new Audio();
+let songs;
 
 function secondsToMinutes(seconds) {
     if (isNaN(seconds) || seconds < 0) {
-        return "Invalid input"
+        return "00 : 00"
     }
 
     const minutes = Math.floor(seconds / 60);
@@ -52,7 +53,7 @@ async function main() {
 
 
     // Getting list of songs
-    let songs = await getSongs()
+    songs = await getSongs()
     playMusic(songs[0], true)
 
     let songUl = document.querySelector(".song-list").getElementsByTagName("ul")[0]
@@ -119,6 +120,25 @@ async function main() {
     document.querySelector(".close").addEventListener("click", () => {
         left.style.left = "-120%"
     })
+
+    //add event listener to prev and next
+    btnprev.addEventListener("click", () => {
+        let index = songs.indexOf(currentSong.src.split("/").slice("-1")[0]);
+        if ((index - 1) >= 0) {
+            playMusic(songs[index - 1])
+        }
+
+    })
+
+    btnnext.addEventListener("click", () => {
+        currentSong.pause()
+        let index = songs.indexOf(currentSong.src.split("/").slice("-1")[0]);
+        if ((index + 1) < songs.length) {
+            playMusic(songs[index + 1])
+        }
+    })
+
+
 
 }
 main()
