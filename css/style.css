@@ -357,6 +357,10 @@ body {
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
+.timevol{
+    justify-content: center;
+    align-items: center;
+}
 
 .songinfo,
 .songtime {
@@ -366,6 +370,14 @@ body {
 
 .songinfo{
     width: 250px;
+    
+}
+
+.volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 .abovebar {
