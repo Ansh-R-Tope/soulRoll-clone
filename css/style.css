@@ -407,7 +407,7 @@ body {
     transform: scale(1.1);
 }
 
-@media (max-width:1400px) {
+@media (max-width:1313px) {
     .left {
         position: absolute;
         left: -120%;
@@ -447,7 +447,7 @@ body {
     }
 
     .card {
-        width: 90vw;
+        width: 44vw;
     }
 
     .card-con {
@@ -467,4 +467,10 @@ body {
         align-items: center;
     }
     
+}
+
+@media (max-width:780px){
+    .card{
+        width: 84vw;
+    }
 }

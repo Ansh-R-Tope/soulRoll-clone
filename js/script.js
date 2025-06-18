@@ -140,7 +140,7 @@ async function main() {
 
     //add event to volume
     document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
-        console.log(e);
+       
         currentSong.volume=parseInt(e.target.value)/100
         
     })
