@@ -1,5 +1,6 @@
 let currentSong = new Audio();
 let songs;
+let currFolder;
 
 function secondsToMinutes(seconds) {
     if (isNaN(seconds) || seconds < 0) {
@@ -18,45 +19,24 @@ function secondsToMinutes(seconds) {
 
 
 
-async function getSongs() {
-    let a = await fetch("http://127.0.0.1:3000/songs/")
+async function getSongs(folder) {
+    currFolder = folder;
+    let a = await fetch(`http://127.0.0.1:3000/${folder}/`)
     let response = await a.text()
 
     let div = document.createElement("div")
     div.innerHTML = response;
     let as = div.getElementsByTagName('a')
-    let songs = []
+    songs = []
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/")[1])
+            songs.push(element.href.split(`/${folder}/`)[1])
         }
     }
-    return songs
-
-}
-
-const playMusic = (track, pause = false) => {
-    // let audio = new Audio("/songs/" + track)
-    currentSong.src = "/songs/" + track
-    if (!pause) {
-        currentSong.play()
-        play.src = "img/pause.svg"
-    }
-
-    document.querySelector(".songinfo").innerHTML = decodeURI(track)
-    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
-}
-
-
-async function main() {
-
-
-    // Getting list of songs
-    songs = await getSongs()
-    playMusic(songs[0], true)
 
     let songUl = document.querySelector(".song-list").getElementsByTagName("ul")[0]
+    songUl.innerHTML = ""
     for (const song of songs) {
         songUl.innerHTML = songUl.innerHTML + `<li><img src="/img/music.svg" alt="">
                             <div class="info">
@@ -77,6 +57,31 @@ async function main() {
             playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
         })
     })
+
+}
+
+const playMusic = (track, pause = false) => {
+    // let audio = new Audio("/songs/" + track)
+    currentSong.src = `${currFolder}/` + track
+    if (!pause) {
+        currentSong.play()
+        play.src = "img/pause.svg"
+    }
+
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+
+
+}
+
+
+async function main() {
+
+
+    // Getting list of songs
+    await getSongs("songs/love")
+    playMusic(songs[0], true)
+
 
     //attach event listener to buttons
     btnplay.addEventListener("click", () => {
@@ -139,10 +144,19 @@ async function main() {
     })
 
     //add event to volume
-    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
-       
-        currentSong.volume=parseInt(e.target.value)/100
-        
+    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
+
+        currentSong.volume = parseInt(e.target.value) / 100
+
+    })
+
+    //load the playlist whenever card is clicked
+    Array.from(document.getElementsByClassName("card")).forEach(e => {
+        e.addEventListener("click", async item => {
+
+            songs = await getSongs(`/songs/${item.currentTarget.dataset.folder}`)
+
+        })
     })
 
 

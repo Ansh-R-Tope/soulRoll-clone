@@ -23,6 +23,10 @@
 }
 
 
+:root{
+    --a:0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -129,6 +133,12 @@ body {
     padding: 10px;
     border-radius: 5px;
     background-color: #203f51;
+    transition: all 0.5s;
+}
+.card:hover{
+    background-color: #b9b9b9;
+    cursor: pointer;
+    --a:1;
 }
 
 .card>* {
@@ -144,9 +154,23 @@ body {
     position: absolute;
     top: 168px;
     right: 17px;
-    opacity: 0;
+    opacity: var(--a);
     transition: all 1s ease-out;
 
+}
+
+.play:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.play:hover circle {
+  fill: #0056b3; /* darker blue on hover */
+  transition: fill 0.3s ease;
+}
+
+.play:hover polygon {
+  fill: #ffffff; /* triangle turns white on hover */
+  transition: fill 0.3s ease;
 }
 
 
