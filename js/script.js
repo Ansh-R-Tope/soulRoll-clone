@@ -117,7 +117,7 @@ async function displayAlbum() {
         e.addEventListener("click", async item => {
 
             songs = await getSongs(`/songs/${item.currentTarget.dataset.folder}`)
-
+            playMusic(songs[0])
         })
     })
 
