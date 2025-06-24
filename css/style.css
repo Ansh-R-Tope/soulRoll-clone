@@ -123,7 +123,7 @@ body {
     gap: 10px;
     flex-wrap: wrap;
     overflow-y: auto;
-    max-height: 70vh;
+    max-height: 60vh;
 
 }
 
@@ -482,6 +482,7 @@ body {
     .card-con {
         margin: 0;
         justify-content: center;
+        
     }
 
     .songinfo{
