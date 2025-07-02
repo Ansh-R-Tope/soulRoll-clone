@@ -1,0 +1,14 @@
+[
+  {
+    "folder": "love",
+    "title": "Romantic songs",
+    "description": "Romantic Songs when u feel moody",
+    "cover": "cover.jpg"
+  },
+  {
+    "folder": "rap",
+    "title": "Rap Hits",
+    "description": "Bangers from the underground",
+    "cover": "cover.jpg"
+  }
+]
