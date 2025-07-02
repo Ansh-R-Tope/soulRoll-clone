@@ -32,14 +32,14 @@ async function getSongs(folder) {
     songUl.innerHTML = "";
 
     for (const song of songs) {
-        songUl.innerHTML += `<li><img src="/img/music.svg" alt="">
+        songUl.innerHTML += `<li><img src="img/music.svg" alt="">
             <div class="info">
                 <div>${song}</div>
                 <div>Song Artist</div>
             </div>
             <div class="playnow">
                 <span>Play Now</span>
-                <img  src="/img/play button.svg" alt="">
+                <img  src="img/play button.svg" alt="">
             </div></li>`;
     }
 
