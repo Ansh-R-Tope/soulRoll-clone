@@ -1,0 +1,15 @@
+[
+  {
+    "folder": "love",
+    "title": "Romantic Songs",
+    "description": "Soft vibes for the mood",
+    "cover": "cover.jpg"
+  },
+  {
+    "folder": "Rap",
+    "title": "Rap Beats",
+    "description": "Hard-hitting bars",
+    "cover": "cover.jpg"
+  }
+]
+
