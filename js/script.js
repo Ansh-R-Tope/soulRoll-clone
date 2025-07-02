@@ -96,7 +96,12 @@ async function displayAlbum() {
                 <p>${album.description}</p>
             </div>
         `;
+        console.log(`Adding album:`, album);
+console.log(`Image path: songs/${album.folder}/${album.cover}`);
+
     }
+
+    
 
     // Add click event listener to each card to load songs from that album
     Array.from(document.getElementsByClassName("card")).forEach(card => {

@@ -1,14 +1,15 @@
 [
   {
     "folder": "love",
-    "title": "Romantic songs",
-    "description": "Romantic Songs when u feel moody",
+    "title": "Romantic Songs",
+    "description": "Soft vibes for the mood",
     "cover": "cover.jpg"
   },
   {
     "folder": "rap",
-    "title": "Rap Hits",
-    "description": "Bangers from the underground",
+    "title": "Rap Beats",
+    "description": "Hard-hitting bars",
     "cover": "cover.jpg"
   }
 ]
+
