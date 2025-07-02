@@ -69,53 +69,94 @@ const playMusic = (track, pause = false) => {
 
 
 async function displayAlbum() {
-  let a = await fetch(`songs/`)
+    // Fetch the albums.json file from songs folder
+    let response = await fetch('songs/albums.json');
+    if (!response.ok) {
+        console.error("Failed to load albums.json");
+        return;
+    }
+    let albums = await response.json();
 
-    let response = await a.text()
+    let cardCon = document.querySelector(".card-con");
+    cardCon.innerHTML = "";  // Clear existing cards
 
-    let div = document.createElement("div")
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a")
-    let cardCon = document.querySelector(".card-con")
-
-
-    let array = Array.from(anchors)
-    for (let index = 0; index < array.length; index++) {
-        const e = array[index];
-
-
-        if (e.href.includes("/songs")) {
-            let folder = (e.href.split("/").slice(-2)[0]);
-            //get the meta data of folder
-            let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
-            let response = await a.json()
-
-            cardCon.innerHTML = cardCon.innerHTML + `<div data-folder="${folder}" class="card">
-                        <div class="play">
-                            <svg class="play-icon" width="30" height="30" viewBox="0 0 16 16"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="8" cy="8" r="8" fill="#007BFF" /> <!-- blue color -->
-                                <polygon points="6,5 11,8 6,11" fill="black" />
-                            </svg>
-                        </div>
-                        <img src="songs/${folder}/cover.jpg" alt="">
-                        <h2>${response.title}</h2>
-                        <p>${response.description}!</p>
-                    </div>`
-        }
+    // Loop through each album object in albums.json
+    for (const album of albums) {
+        cardCon.innerHTML += `
+            <div data-folder="${album.folder}" class="card">
+                <div class="play">
+                    <svg class="play-icon" width="30" height="30" viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8" cy="8" r="8" fill="#007BFF" />
+                        <polygon points="6,5 11,8 6,11" fill="black" />
+                    </svg>
+                </div>
+                <img src="songs/${album.folder}/${album.cover}" alt="${album.title} Cover">
+                <h2>${album.title}</h2>
+                <p>${album.description}</p>
+            </div>
+        `;
     }
 
-
-    //load the playlist whenever card is clicked
-    Array.from(document.getElementsByClassName("card")).forEach(e => {
-        e.addEventListener("click", async item => {
-
-            songs = await getSongs(`/songs/${item.currentTarget.dataset.folder}`)
-            playMusic(songs[0])
-        })
-    })
-
+    // Add click event listener to each card to load songs from that album
+    Array.from(document.getElementsByClassName("card")).forEach(card => {
+        card.addEventListener("click", async (event) => {
+            let folder = card.dataset.folder;
+            songs = await getSongs(`songs/${folder}`);
+            playMusic(songs[0]);
+        });
+    });
 }
+
+
+// async function displayAlbum() {
+//   let a = await fetch(`songs/`)
+
+//     let response = await a.text()
+
+//     let div = document.createElement("div")
+//     div.innerHTML = response;
+//     let anchors = div.getElementsByTagName("a")
+//     let cardCon = document.querySelector(".card-con")
+
+
+//     let array = Array.from(anchors)
+//     for (let index = 0; index < array.length; index++) {
+//         const e = array[index];
+
+
+//         if (e.href.includes("/songs")) {
+//             let folder = (e.href.split("/").slice(-2)[0]);
+//             //get the meta data of folder
+//             let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
+//             let response = await a.json()
+
+//             cardCon.innerHTML = cardCon.innerHTML + `<div data-folder="${folder}" class="card">
+//                         <div class="play">
+//                             <svg class="play-icon" width="30" height="30" viewBox="0 0 16 16"
+//                                 xmlns="http://www.w3.org/2000/svg">
+//                                 <circle cx="8" cy="8" r="8" fill="#007BFF" /> <!-- blue color -->
+//                                 <polygon points="6,5 11,8 6,11" fill="black" />
+//                             </svg>
+//                         </div>
+//                         <img src="songs/${folder}/cover.jpg" alt="">
+//                         <h2>${response.title}</h2>
+//                         <p>${response.description}!</p>
+//                     </div>`
+//         }
+//     }
+
+
+//     //load the playlist whenever card is clicked
+//     Array.from(document.getElementsByClassName("card")).forEach(e => {
+//         e.addEventListener("click", async item => {
+
+//             songs = await getSongs(`/songs/${item.currentTarget.dataset.folder}`)
+//             playMusic(songs[0])
+//         })
+//     })
+
+// }
 
 async function main() {
 
