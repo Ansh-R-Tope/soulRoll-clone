@@ -23,7 +23,7 @@ async function getSongs(folder) {
     currFolder = folder;
 
     // fetch the song list from manifest.json
-   let response = await fetch(`${folder}/album.json`);
+   let response = await fetch(`${folder}/albums.json`);
 
     let data = await response.json();
 
