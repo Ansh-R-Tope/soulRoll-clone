@@ -97,8 +97,7 @@ async function displayAlbum() {
                 <p>${album.description}</p>
             </div>
         `;
-        console.log(`Adding album:`, album);
-console.log(`Image path: songs/${album.folder}/${album.cover}`);
+       
 
     }
 
@@ -114,55 +113,6 @@ console.log(`Image path: songs/${album.folder}/${album.cover}`);
     });
 }
 
-
-// async function displayAlbum() {
-//   let a = await fetch(`songs/`)
-
-//     let response = await a.text()
-
-//     let div = document.createElement("div")
-//     div.innerHTML = response;
-//     let anchors = div.getElementsByTagName("a")
-//     let cardCon = document.querySelector(".card-con")
-
-
-//     let array = Array.from(anchors)
-//     for (let index = 0; index < array.length; index++) {
-//         const e = array[index];
-
-
-//         if (e.href.includes("/songs")) {
-//             let folder = (e.href.split("/").slice(-2)[0]);
-//             //get the meta data of folder
-//             let a = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
-//             let response = await a.json()
-
-//             cardCon.innerHTML = cardCon.innerHTML + `<div data-folder="${folder}" class="card">
-//                         <div class="play">
-//                             <svg class="play-icon" width="30" height="30" viewBox="0 0 16 16"
-//                                 xmlns="http://www.w3.org/2000/svg">
-//                                 <circle cx="8" cy="8" r="8" fill="#007BFF" /> <!-- blue color -->
-//                                 <polygon points="6,5 11,8 6,11" fill="black" />
-//                             </svg>
-//                         </div>
-//                         <img src="songs/${folder}/cover.jpg" alt="">
-//                         <h2>${response.title}</h2>
-//                         <p>${response.description}!</p>
-//                     </div>`
-//         }
-//     }
-
-
-//     //load the playlist whenever card is clicked
-//     Array.from(document.getElementsByClassName("card")).forEach(e => {
-//         e.addEventListener("click", async item => {
-
-//             songs = await getSongs(`/songs/${item.currentTarget.dataset.folder}`)
-//             playMusic(songs[0])
-//         })
-//     })
-
-// }
 
 async function main() {
 
@@ -235,25 +185,44 @@ async function main() {
         }
     })
 
-    //add event to volume
-    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
+    // //add event to volume
+    // document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
 
-        currentSong.volume = parseInt(e.target.value) / 100
+    //     currentSong.volume = parseInt(e.target.value) / 100
 
-    })
+    // })
 
-    //add event listner to mute to volume
-    document.querySelector(".volume>img").addEventListener("click", e => {
-        if (e.target.src.includes("img/volume.svg")) {
-            e.target.src = e.target.src.replace("img/volume.svg", "img/mute.svg")
-            currentSong.volume = 0;
-            document.querySelector(".range").getElementsByTagName("input")[0].value=0
-        } else {
-            e.target.src = e.target.src.replace("img/mute.svg", "img/volume.svg")
-            currentSong.volume = .10;
-            document.querySelector(".range").getElementsByTagName("input")[0].value=10
-        }
-    })
+    // //add event listner to mute to volume
+    // document.querySelector(".volume>img").addEventListener("click", e => {
+    //     if (e.target.src.includes("img/volume.svg")) {
+    //         e.target.src = e.target.src.replace("img/volume.svg", "img/mute.svg")
+    //         currentSong.volume = 0;
+    //         document.querySelector(".range").getElementsByTagName("input")[0].value=0
+    //     } else {
+    //         e.target.src = e.target.src.replace("img/mute.svg", "img/volume.svg")
+    //         currentSong.volume = .10;
+    //         document.querySelector(".range").getElementsByTagName("input")[0].value=10
+    //     }
+    // })
+
+    // Show search input when "Search" menu item is clicked
+document.querySelector(".home ul li:nth-child(2)").addEventListener("click", () => {
+    const searchContainer = document.querySelector(".search-container");
+    searchContainer.style.display = "block";
+    document.getElementById("searchInput").focus();
+});
+
+// Filter songs as user types
+document.getElementById("searchInput").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const listItems = document.querySelectorAll(".song-list ul li");
+
+    listItems.forEach(li => {
+        const songName = li.querySelector(".info div").textContent.toLowerCase();
+        li.style.display = songName.includes(query) ? "flex" : "none";
+    });
+});
+
 
 
 }

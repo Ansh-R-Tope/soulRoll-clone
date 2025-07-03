@@ -10,5 +10,11 @@
     "title": "Rap Hits",
     "description": "Bangers from the underground",
     "cover": "cover.jpg"
+  },
+  {
+    "folder": "old",
+    "title": "Old Hits",
+    "description": "Old hits from the Bollywood",
+    "cover": "cover.jpg"
   }
 ]
