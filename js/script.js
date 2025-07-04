@@ -246,7 +246,6 @@ btnnext.addEventListener("click", () => {
     });
 
 
-
 }
 main()
 
