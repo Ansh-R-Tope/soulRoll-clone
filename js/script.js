@@ -22,31 +22,32 @@ function secondsToMinutes(seconds) {
 async function getSongs(folder) {
     currFolder = folder;
 
-    // fetch the song list from manifest.json
-   let response = await fetch(`${folder}/album.json`);
-
+    let response = await fetch(`${folder}/album.json`);
     let data = await response.json();
 
     songs = data.songs;
 
-    let songUl = document.querySelector(".song-list").getElementsByTagName("ul")[0];
+    let songUl = document.querySelector(".song-list ul");
     songUl.innerHTML = "";
 
     for (const song of songs) {
-        songUl.innerHTML += `<li><img src="img/music.svg" alt="">
+        songUl.innerHTML += `<li data-song="${song}">
+            <img src="img/music.svg" alt="">
             <div class="info">
                 <div>${song}</div>
                 <div>Song Artist</div>
             </div>
             <div class="playnow">
                 <span>Play Now</span>
-                <img  src="img/play button.svg" alt="">
-            </div></li>`;
+                <img src="img/play button.svg" alt="">
+            </div>
+        </li>`;
     }
 
-    Array.from(document.querySelector(".song-list").getElementsByTagName("li")).forEach(e => {
-        e.addEventListener("click", () => {
-            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+    // Add click listener for each song item
+    Array.from(songUl.getElementsByTagName("li")).forEach(li => {
+        li.addEventListener("click", () => {
+            playMusic(li.dataset.song);
         });
     });
 
@@ -54,19 +55,27 @@ async function getSongs(folder) {
 }
 
 
+
 const playMusic = (track, pause = false) => {
-    // let audio = new Audio("/songs/" + track)
-    currentSong.src = `${currFolder}/` + track
+    currentSong.src = `${currFolder}/` + track;
     if (!pause) {
-        currentSong.play()
-        play.src = "img/pause.svg"
+        currentSong.play();
+        play.src = "img/pause.svg";
     }
 
-    document.querySelector(".songinfo").innerHTML = decodeURI(track)
-    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+    document.querySelector(".songinfo").innerHTML = decodeURI(track);
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 
+    // Remove "playing" class from all songs
+    document.querySelectorAll(".song-list li").forEach(li => li.classList.remove("playing"));
 
+    // Add "playing" class to current song's li
+    const currentLi = document.querySelector(`.song-list li[data-song="${track}"]`);
+    if (currentLi) {
+        currentLi.classList.add("playing");
+    }
 }
+
 
 
 async function displayAlbum() {
@@ -97,11 +106,11 @@ async function displayAlbum() {
                 <p>${album.description}</p>
             </div>
         `;
-       
+
 
     }
 
-    
+
 
     // Add click event listener to each card to load songs from that album
     Array.from(document.getElementsByClassName("card")).forEach(card => {
@@ -109,8 +118,13 @@ async function displayAlbum() {
             let folder = card.dataset.folder;
             songs = await getSongs(`songs/${folder}`);
             playMusic(songs[0]);
+
+            // Slide in the library panel on mobile
+            const leftPanel = document.querySelector(".left");
+            leftPanel.style.left = "0"; // show library
         });
     });
+
 }
 
 
@@ -169,21 +183,29 @@ async function main() {
     })
 
     //add event listener to prev and next
-    btnprev.addEventListener("click", () => {
-        let index = songs.indexOf(currentSong.src.split("/").slice("-1")[0]);
-        if ((index - 1) >= 0) {
-            playMusic(songs[index - 1])
-        }
+   btnprev.addEventListener("click", () => {
+    let currentSrc = currentSong.src;
+    let currentFile = decodeURIComponent(currentSrc.split("/").pop());  
+    let index = songs.indexOf(currentFile);
+    if (index > 0) {
+        playMusic(songs[index - 1]);
+    } else {
+        console.log("Prev - already at first song");
+    }
+});
 
-    })
+btnnext.addEventListener("click", () => {
+    let currentSrc = currentSong.src;
+    let currentFile = decodeURIComponent(currentSrc.split("/").pop());
+    let index = songs.indexOf(currentFile);
+    if (index >= 0 && index < songs.length - 1) {
+        playMusic(songs[index + 1]);
+    } else {
+        console.log("Next - already at last song or invalid index");
+    }
+});
 
-    btnnext.addEventListener("click", () => {
-        currentSong.pause()
-        let index = songs.indexOf(currentSong.src.split("/").slice("-1")[0]);
-        if ((index + 1) < songs.length) {
-            playMusic(songs[index + 1])
-        }
-    })
+
 
     // //add event to volume
     // document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
@@ -206,22 +228,22 @@ async function main() {
     // })
 
     // Show search input when "Search" menu item is clicked
-document.querySelector(".home ul li:nth-child(2)").addEventListener("click", () => {
-    const searchContainer = document.querySelector(".search-container");
-    searchContainer.style.display = "block";
-    document.getElementById("searchInput").focus();
-});
-
-// Filter songs as user types
-document.getElementById("searchInput").addEventListener("input", function () {
-    const query = this.value.toLowerCase();
-    const listItems = document.querySelectorAll(".song-list ul li");
-
-    listItems.forEach(li => {
-        const songName = li.querySelector(".info div").textContent.toLowerCase();
-        li.style.display = songName.includes(query) ? "flex" : "none";
+    document.querySelector(".home ul li:nth-child(2)").addEventListener("click", () => {
+        const searchContainer = document.querySelector(".search-container");
+        searchContainer.style.display = "block";
+        document.getElementById("searchInput").focus();
     });
-});
+
+    // Filter songs as user types
+    document.getElementById("searchInput").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const listItems = document.querySelectorAll(".song-list ul li");
+
+        listItems.forEach(li => {
+            const songName = li.querySelector(".info div").textContent.toLowerCase();
+            li.style.display = songName.includes(query) ? "flex" : "none";
+        });
+    });
 
 
 

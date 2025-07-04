@@ -100,7 +100,6 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-    /* background-color: rgb(34, 34, 34); */
 }
 
 .header>* {
@@ -164,12 +163,12 @@ body {
 }
 
 .play:hover circle {
-  fill: #0056b3; /* darker blue on hover */
+  fill: #0056b3; 
   transition: fill 0.3s ease;
 }
 
 .play:hover polygon {
-  fill: #ffffff; /* triangle turns white on hover */
+  fill: #ffffff; 
   transition: fill 0.3s ease;
 }
 
@@ -316,29 +315,6 @@ body {
     padding: 12px;
 }
 
-/* .seekbar {
-    position: absolute;
-    bottom: 0;
-    width: 70vw;
-    height: 2px;
-    background: #ccc;
-    Light gray for track
-    border-radius: 10px;
-    margin: 6px;
-
-}
-
-.circle {
-    width: 13px;
-    height: 13px;
-    border-radius: 13px;
-    background-color: #ccc;
-    position: relative;
-    bottom: 6px;
-    left: 0%;
-    transition: left 0.5s;
-} */
-
 
 .seekbar {
     position: absolute;
@@ -360,7 +336,6 @@ body {
     left: 0;
     height: 100%;
     width: 0%;
-    /* Filled by JS */
     background: linear-gradient(to right, #00f260, #0575e6);
     border-radius: 10px;
     transition: width 0.5s ease;
@@ -396,6 +371,12 @@ body {
     width: 250px;
     
 }
+
+.song-list li.playing {
+    background-color: #007BFF;   /* or any highlight color */
+    color: white;
+}
+
 
 .volume{
     display: flex;
@@ -453,16 +434,18 @@ body {
 
 
 @media (max-width:1313px) {
-    .left {
-        position: absolute;
-        left: -120%;
-        transition: all .3s;
-        z-index: 1;
-        width: 370px;
-        background: linear-gradient(to right, #5B8298, #4A6B7E, #2D4555);
-        padding: 0;
+   .left {
+    position: fixed;
+    top: 0;
+    left: -120%;
+    width: 370px;
+    height: 100vh;
+    background: linear-gradient(to right, #5B8298, #4A6B7E, #2D4555);
+    padding: 0;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
 
-    }
 
     .left .close {
         position: absolute;
@@ -521,13 +504,16 @@ body {
 }
 
 @media (max-width: 600px) {
-  .card-con {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 16px; /* space between cards */
-    padding: 10px 16px; /* space from screen edges */
-    justify-items: center;
-  }
+.card-con {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding-bottom: 75px;
+  justify-items: center;
+  max-height: calc(100vh - 170px); 
+  overflow-y: auto;
+}
+
 
   .card {
     width: 100%;
@@ -549,3 +535,54 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  .playbar {
+  width: 100vw;        
+  left: 0;            
+  right: 0;
+  padding: 10px 16px;  
+  box-sizing: border-box;
+}
+
+
+  .abovebar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .songinfo {
+    font-size: 14px;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .controls {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 6px;
+    margin: 0;
+  }
+
+  .songtime {
+        display: block !important;  
+        color: white;
+        font-size: 12px;
+        white-space: nowrap;
+  }
+
+  .seekbar {
+    height: 5px;
+    margin: 6px 0 0;
+    width: 100%;
+  }
+ 
+}
+  
